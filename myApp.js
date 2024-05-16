@@ -10,7 +10,7 @@ app.get('/', function(req, res) {
     res.sendFile(absolutePath);
 });
 
-
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 
