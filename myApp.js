@@ -4,7 +4,7 @@ let app = express();
 let path = require('path');
 require('dotenv').config()
 
-const logger = function(req, res, next) {
+const logger = (req, res, next)=> {
     const method = req.method
     const path = req.path
     const ip = req.ip
@@ -30,7 +30,12 @@ app.get('/json',(req,res)=>{
     res.json({"message": message})
 })
 
-
+app.get('/now',(req, res, next)=> {
+    req.time = new Date().toString()
+    next();
+  }, (req, res)=>{
+    res.json({time: req.time});
+  })
 
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
