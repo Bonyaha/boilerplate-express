@@ -3,6 +3,9 @@ let express = require('express');
 let app = express();
 let path = require('path');
 require('dotenv').config()
+let bodyParser = require('body-parser')
+
+
 
 const logger = (req, res, next)=> {
     const method = req.method
@@ -14,6 +17,7 @@ const logger = (req, res, next)=> {
   }
   
 app.use(logger)
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
     //console.log('__dirname is',__dirname)
