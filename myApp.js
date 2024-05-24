@@ -14,6 +14,7 @@ const logger = (req, res, next)=> {
   }
   
 app.use(logger)
+
 app.get('/', (req, res) => {
     //console.log('__dirname is',__dirname)
     let absolutePath = path.join(__dirname, 'views', 'index.html');
@@ -44,6 +45,11 @@ app.get('/now',(req, res, next)=> {
     res.json({time: req.time});
   })
 
+app.get('/name',(req,res)=> {
+const {first: firstname,last:lastname} = req.query
+
+res.json({ name: `${firstname} ${lastname}`})
+})
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
