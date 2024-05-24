@@ -45,11 +45,18 @@ app.get('/now',(req, res, next)=> {
     res.json({time: req.time});
   })
 
-app.get('/name',(req,res)=> {
+app.route('/name')
+.get((req,res)=> {
+  const {first: firstname,last:lastname} = req.query
+  
+  res.json({ name: `${firstname} ${lastname}`})
+  })
+
+/* app.get('/name',(req,res)=> {
 const {first: firstname,last:lastname} = req.query
 
 res.json({ name: `${firstname} ${lastname}`})
-})
+}) */
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
