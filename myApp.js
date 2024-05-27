@@ -17,6 +17,7 @@ const logger = (req, res, next)=> {
   }
   
 app.use(logger)
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.get('/', (req, res) => {
@@ -55,14 +56,12 @@ app.route('/name')
   
   res.json({ name: `${firstname} ${lastname}`})
   })
+  .post((req,res)=> {
+    const { first: firstname, last: lastname } = req.body;
+    console.log('firstname', firstname)
+    res.json({ name: `${firstname} ${lastname}` });
+  })
 
-/* app.get('/name',(req,res)=> {
-const {first: firstname,last:lastname} = req.query
-
-res.json({ name: `${firstname} ${lastname}`})
-}) */
-
-app.use('/public', express.static(path.join(__dirname, 'public')));
 
 
 
